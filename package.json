@@ -1,0 +1,107 @@
+{
+  "name": "@una-ecom/shopify-connector",
+  "version": "1.0.0",
+  "description": "A Shopify connector for Una E-Commerce",
+  "url": "https://github.com/Una-Ecom/shopify-connector",
+  "repository": "https://github.com/Una-Ecom/shopify-connector.git",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "prepublishOnly": "npm run build",
+    "publish": "semantic-release",
+    "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "rhyswfbowles",
+  "license": "MIT",
+  "keywords": [
+    "e-commerce",
+    "sdk",
+    "una",
+    "una-ecom",
+    "plugin"
+  ],
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md",
+            "LICENSE",
+            "README.md"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "README.md",
+              "label": "Documentation"
+            },
+            {
+              "path": "CHANGELOG.md",
+              "label": "Documentation"
+            },
+            {
+              "path": "LICENSE",
+              "label": "License"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@una-ecom/plugin-sdk": "^1.5.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.21.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "@types/node": "^22.13.9",
+    "eslint": "^9.21.0",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0",
+    "vitest": "^3.0.7"
+  }
+}
